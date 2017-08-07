@@ -1,0 +1,19 @@
+<div id="post_content">
+  <h1 class="title"><%= @post.title %></h1>
+  <p class="date">
+    Submitted <%= time_ago_in_words(@post.created_at) %> Ago
+    <% if user_signed_in? %>
+        | <%= link_to 'Editar', edit_post_path(@post) %> |
+        <%= link_to 'Borrar', post_path(@post), method: :delete, data: { confirm: '¿Estas seguro?' } %>
+    <% end %>
+  </p>
+  <p class="body"><%= @post.body %></p>
+<div><%= image_tag(@post.photo, :style =>'width:200px') %></div>
+  <div id="comments">
+    <h2><%= @post.comments.count %> Comentarios</h2>
+    <%= render @post.comments %>
+
+    <h3>Agregar un comentario:</h3>
+    <%= render "comments/form" %>
+  </div>
+</div>
